@@ -18,7 +18,7 @@ HookReturnCode discord( SayParameters@ pParams){
             g_PlayerFuncs.ClientPrint(  pPlayer, HUD_PRINTTALK, "---------------------------------------------------------------------- \n");
             g_PlayerFuncs.ClientPrint(  pPlayer, HUD_PRINTTALK, " \n");
             g_PlayerFuncs.ClientPrint(  pPlayer, HUD_PRINTTALK, "Link de nuestro discord: \n");
-            g_PlayerFuncs.ClientPrint(  pPlayer, HUD_PRINTTALK, "https://discord.gg/WrZJcRZvEZ \n");
+            g_PlayerFuncs.ClientPrint(  pPlayer, HUD_PRINTTALK, "https://discord.gg/WrZJcRZvEZ \n"); // solo es un ejemplo
             g_PlayerFuncs.ClientPrint(  pPlayer, HUD_PRINTTALK, " \n");
   			g_PlayerFuncs.ClientPrint(  pPlayer, HUD_PRINTTALK, "---------------------------------------------------------------------- \n");
                           
