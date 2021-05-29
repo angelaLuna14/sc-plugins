@@ -22,7 +22,7 @@ HookReturnCode discord( SayParameters@ pParams){
             g_PlayerFuncs.ClientPrint(  pPlayer, HUD_PRINTTALK, " \n");
   			g_PlayerFuncs.ClientPrint(  pPlayer, HUD_PRINTTALK, "---------------------------------------------------------------------- \n");
                           
-              NetworkMessage msg(MSG_ONE, NetworkMessages::SVC_STUFFTEXT, pPlayer.edict()); //esto es para habrir consola automaticamente
+              NetworkMessage msg(MSG_ONE, NetworkMessages::SVC_STUFFTEXT, pPlayer.edict()); //esto es para abrir consola automaticamente
    				         msg.WriteString("toggleconsole");
  			       msg.End();
 		}
