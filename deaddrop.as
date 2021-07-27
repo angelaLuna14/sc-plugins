@@ -1,11 +1,6 @@
 CScheduledFunction@ g_explosion = null;
 
 
-void Enable()
-{
-    @ents::g_entity = g_Scheduler.SetInterval( "entitys", 0.2 );
-}    
-
 
 /*Usage: Add #include "deaddrop" in the script header
 then add Enable(); in MapInit in your main map script
