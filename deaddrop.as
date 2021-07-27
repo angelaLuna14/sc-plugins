@@ -10,83 +10,75 @@ void Enable()
 /*Usage: Add #include "deaddrop" in the script header
 then add Enable(); in MapInit in your main map script
 Angela Luna */
+void PluginInit()
+{	
+	g_Module.ScriptInfo.SetAuthor( "Angela Luna" );
+	g_Module.ScriptInfo.SetContactInfo("https://discord.gg/WrZJcRZvEZ");
+
+	g_Scheduler.ClearTimerList();
+	monsterList.removeRange(0, monsterList.length());
+	nameList.removeRange(0, nameList.length());
+	posList.removeRange(0, posList.length());
 
 
-
-void PluginInit(){
-    g_Module.ScriptInfo.SetAuthor("Angela Luna");
-    g_Module.ScriptInfo.SetContactInfo("Feel free to contact me on GitHub.");
-}
-
-namespace ents
-{
-	CScheduledFunction@ g_entity = null;
-	
-	void entitys(){
-            
-        CBaseEntity@ rat = null;
-        
-        while( ( @rat = g_EntityFuncs.FindEntityByClassname( rat, "monster_human_grunt" ) ) !is null )
-        {
-            if( rat.IsAlive() == false || rat.pev.health < -50)
-
-            {
-                array<CBaseEntity@> booms1(e_rat);				
-                for (int y = 0; y < e_rat; ++y) {
-                @booms1[y] = g_EntityFuncs.Create("monster_handgrenade",rat.pev.origin + Vector(Math.RandomLong(0, 0), Math.RandomLong(0, 0), 0 ), Vector(0, 0, 0), false);	  
-                g_Scheduler.SetTimeout("SatchelCharge1", 0.0f, EHandle(booms1[y]));
-                }
-
-
-            }
-        }
-    }
-
-}
-
-
-
-
-
-void SatchelCharge(EHandle& in ent) {
-  CBaseEntity@ boom = null;
-
-  if (!ent.IsValid())
-    return;
-
-  @boom = ent.GetEntity();
-
-  CBaseEntity@ pPlayer = g_EntityFuncs.Instance(boom.pev.owner);
-
-  for (int y = 0; y < e_rat; ++y) {
-
-  }
-
-  if (boom !is null)
-    boom.Use(pPlayer, pPlayer, USE_ON, 0);
-}
-
-
-
-
-
-
-void Timeentsboom(EHandle& in plrEnt) {
-  if (!plrEnt.IsValid())
-    return;
-
-  if (g_explosion !is null)
-    g_Scheduler.RemoveTimer(g_explosion);
-
-  @g_explosion = g_Scheduler.SetInterval("entsboom", 0.0f, 15, plrEnt);
-}
-
-void entsboom(EHandle& in plrEnt) {
-  if (!plrEnt.IsValid())
-    return;
-
-  CBaseEntity@ pPlayer = plrEnt.GetEntity();
-
-  g_EntityFuncs.CreateExplosion(pPlayer.pev.origin, Vector(-90, 0, 0), g_EntityFuncs.IndexEnt(0), Math.RandomLong(25, 125), true);
+	@refreshMonster = g_Scheduler.SetInterval("killdrop", 0.3, g_Scheduler.REPEAT_INFINITE_TIMES);
   
+	
 }
+
+array<EHandle> monsterList;
+array<string> nameList;
+array<Vector> posList;
+CScheduledFunction@ refreshMonster;
+
+
+
+
+const array<string> P_ENTITIES = {FL_MONSTER};
+void MapInit()
+{
+
+
+}
+
+
+void killdrop(){
+	
+	for(int i=0; i<int(monsterList.length()); i++){
+		CBaseEntity@ thatMonster = monsterList[i];
+		if(thatMonster is null || !thatMonster.IsAlive()){
+			m_position(posList[i]);
+	  	}
+	}
+	monsterList.removeRange(0, monsterList.length());
+	nameList.removeRange(0, nameList.length());
+	posList.removeRange(0, posList.length());
+	CBaseEntity@ thisMonster = null;
+	int monsterNumber = 0;
+	while((@thisMonster = g_EntityFuncs.FindEntityByClassname(thisMonster, "monster_human_*")) !is null){
+	  int relationship = thisMonster.IRelationshipByClass(CLASS_PLAYER);
+	  if(thisMonster.IsAlive() && relationship != R_AL && relationship != R_NO){
+		EHandle thisMonsterHandle = thisMonster;
+		monsterList.insertLast(thisMonsterHandle);
+		nameList.insertLast(thisMonster.GetClassname());
+		posList.insertLast(thisMonster.GetOrigin());
+	  }
+	}
+  
+
+
+
+}
+
+
+void m_position( Vector position){
+	CBaseEntity@ g_monster = null;
+	while((@g_monster = g_EntityFuncs.FindEntityByClassname(g_monster, "monster_*")) !is null){
+		g_EntityFuncs.Create("monster_handgrenade",rat.pev.origin + Vector(Math.RandomLong(0, 0), Math.RandomLong(0, 0), 0 ), Vector(0, 0, 0), false);
+	}
+
+}
+
+
+
+
