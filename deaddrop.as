@@ -10,10 +10,8 @@ void Enable()
 /*Usage: Add #include "deaddrop" in the script header
 then add Enable(); in MapInit in your main map script
 Angela Luna */
-void PluginInit()
+void Enable()
 {	
-	g_Module.ScriptInfo.SetAuthor( "Angela Luna" );
-	g_Module.ScriptInfo.SetContactInfo("https://discord.gg/WrZJcRZvEZ");
 
 	g_Scheduler.ClearTimerList();
 	monsterList.removeRange(0, monsterList.length());
