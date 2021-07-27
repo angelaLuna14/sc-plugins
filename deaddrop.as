@@ -1,5 +1,5 @@
 CScheduledFunction@ g_explosion = null;
-const int e_rat = 1;
+
 
 void Enable()
 {
