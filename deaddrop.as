@@ -1,7 +1,3 @@
-CScheduledFunction@ g_explosion = null;
-
-
-
 /*Usage: Add #include "deaddrop" in the script header
 then add Enable(); in MapInit in your main map script
 Angela Luna */
@@ -65,13 +61,33 @@ void killdrop(){
 
 
 void m_position( Vector position){
-	CBaseEntity@ g_monster = null;
-	while((@g_monster = g_EntityFuncs.FindEntityByClassname(g_monster, "monster_*")) !is null){
-		g_EntityFuncs.Create("monster_handgrenade",rat.pev.origin + Vector(Math.RandomLong(0, 0), Math.RandomLong(0, 0), 0 ), Vector(0, 0, 0), false);
-	}
 
+  for( int i = 0 ; i < g_Engine.maxEntities; ++i ) {
+		CBaseEntity@ ent = g_EntityFuncs.Instance( i );
+		if( ent !is null ) {
+            
+			if ( ent.pev.classname == "monster_human_torch_ally"  )
+			{		
+        g_EntityFuncs.Create("monster_handgrenade",position + Vector(Math.RandomLong(0, 0), Math.RandomLong(0, 0), 0 ), Vector(0, 0, 0), false);
+      }
+      else if ( ent.pev.classname == "monster_human_grunt_ally"  )
+			{		
+        g_EntityFuncs.Create("monster_handgrenade",position + Vector(Math.RandomLong(0, 0), Math.RandomLong(0, 0), 0 ), Vector(0, 0, 0), false);
+      }
+      else if ( ent.pev.classname == "monster_human_medic_ally"  )
+			{		
+        g_EntityFuncs.Create("monster_handgrenade",position + Vector(Math.RandomLong(0, 0), Math.RandomLong(0, 0), 0 ), Vector(0, 0, 0), false);
+      }
+      else if ( ent.pev.classname == "monster_human_grunt"  )
+			{		
+        g_EntityFuncs.Create("monster_handgrenade",position + Vector(Math.RandomLong(0, 0), Math.RandomLong(0, 0), 0 ), Vector(0, 0, 0), false);
+      }
+      else if ( ent.pev.classname == "monster_human_assasin"  )
+			{		
+        g_EntityFuncs.Create("monster_handgrenade",position + Vector(Math.RandomLong(0, 0), Math.RandomLong(0, 0), 0 ), Vector(0, 0, 0), false);
+      }
+    }
+  }
 }
-
-
 
 
